@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct data {
-    int number;
+struct dll {
+    int seq;
 
-    struct data *next, *prev;
+    struct dll *next, *prev;
 } *head, *tail, *curr;
 
 void append(int n) {
-    struct data *node = (struct data*) malloc(sizeof(struct data));
+    struct dll *node = (struct dll*) malloc(sizeof(struct dll));
 
-    node->number = n;
+    node->seq = n;
 
     if (head == NULL) {
         head = tail = node;
@@ -29,7 +29,7 @@ void append(int n) {
     return;
 }
 
-void deleteHead() {
+void delhead() {
     if (head != NULL) {
         curr = head;
         
@@ -43,9 +43,9 @@ void deleteHead() {
 void printLL(){
     curr = head;
 
-    printf("List Data inside LinkedList: \n");
+    printf("Data inside LinkedList: \n");
     while(curr) {
-        printf("%d ", curr->number);
+        printf("%d ", curr->seq);
         curr = curr->next;
     }
     printf("\n");
@@ -55,14 +55,14 @@ void printLL(){
 
 int main(void) {
     int arr[] = {23, 45, 79, 3, 47, 11, 92, 60, 39, 28, 6, 72, 13, 28};
-    int i;
+    int j;
 
-    for(i=0;i<sizeof(arr)/sizeof(int);i++) {
-        append(arr[i]);
+    for(j=0;j<sizeof(arr)/sizeof(int);j++) {
+        append(arr[j]);
     }
 
     printLL();
-    deleteHead();
+    delhead();
     printLL();
 
     return 0;
