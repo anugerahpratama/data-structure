@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <conio.h>
+
+#define TOP 15
+
+int queue[TOP];
+int front = -1;
+int rear = -1;
+
+void insert(int num){
+	if(front==0 && rear == TOP-1){
+		printf("\n OVERFLOW");
+	}
+	else if(front == -1 && rear== -1){
+		front=rear=0;
+		queue[rear]=num;
+	}
+	else if(rear==TOP-1 && front!=0){
+		rear=0;
+		queue[rear]=num;
+	}
+	else{
+		rear++;
+		queue[rear]=num;
+	}
+}
+
+void display(){
+	int i;
+	printf("\n");
+	if(front == -1 && rear == -1){
+		printf("\n QUEUE IS EMPTY");
+	}
+	else{
+		if(front<rear){
+			for(i = front;i <= rear;i++){
+				printf("\t %d", queue[i]);
+			}
+		}
+		else{
+			for(i = front;i < TOP;i++){
+				printf("\t %d", queue[i]);
+			}
+			for(i = 0;i <= rear;i++){
+				printf("\t %d", queue[i]);
+			}
+		}
+	}
+}
+
+int main(void){
+	int rnum[] = {7, 19, 72, 44, 62, 10, 9, 34, 50, 27, 83, 4};
+	for(int i=0;i<sizeof(rnum)/sizeof(rnum[0]);i++){
+		insert(rnum[i]);
+	}
+
+	printf(" Initial Circular Queue :\n");
+	display();
+	printf("\n\n");
+	printf(" Put 3 to the queue\n");
+	insert(3);
+	printf("\n");
+	printf(" Current Circular Queue :\n");
+	display();
+	return 0;
+}
+
